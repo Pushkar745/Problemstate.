@@ -20,13 +20,27 @@ namespace ObjectPrctical
             string text1 = File.ReadAllText(@"E:\Designite\push.txt");
             
             string text = File.ReadAllText(@"E:\Designite\pushkar.txt");
-            Assert.IsFalse(string.IsNullOrEmpty(text1));
-            Assert.AreNotEqual(text1, text);
-            Assert.AreEqual(text, text1);
+            //Assert.IsFalse(string.IsNullOrEmpty(text1));
+           Assert.AreNotEqual(text1, text);
+           // Assert.AreEqual(text, text1);
 
 
 
         }
-        
+        [Test]
+        public void Push()
+        {
+            string text1 = File.ReadAllText(@"E:\Designite\push.txt");
+
+            Assert.IsFalse(string.IsNullOrEmpty(text1));
+        }
+        [Test]
+        public void Push1()
+        {
+            string text1 = File.ReadAllText(@"E:\Designite\push.txt");
+
+            string text = File.ReadAllText(@"E:\Designite\pushkar.txt");
+            Assert.AreEqual(text, text1);
+        }
     }
 }
