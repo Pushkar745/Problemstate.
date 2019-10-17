@@ -1,32 +1,41 @@
-﻿using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿using System.IO;
+using NUnit.Framework;
+using static NUnit.Framework.Assert;
 
 namespace ObjectPrctical
 {
     [TestFixture]
-    class MyTest
+    internal class MyTest
     {
         [Test]
-        public void Readtext()
+        public void ReadTextarea()
         {
        
 
-            string text1 = File.ReadAllText(@"E:\Designite\push.txt");
+            var text1 = File.ReadAllText(@"E:\Designite\push.txt");
             
-            string text = File.ReadAllText(@"E:\Designite\pushkar.txt");
-            Assert.IsFalse(string.IsNullOrEmpty(text1));
-            Assert.AreNotEqual(text1, text);
-            Assert.AreEqual(text, text1);
+            var text = File.ReadAllText(@"E:\Designite\pushkar.txt");
+            IsFalse(condition: string.IsNullOrEmpty(text1));
+            
 
 
 
         }
-        
+        [Test]
+        public void Push()
+        {
+            var text1 = File.ReadAllText(@"E:\Designite\push.txt");
+
+            var text = File.ReadAllText(@"E:\Designite\pushkar.txt");
+            AreNotEqual(text1, text);
+        }
+        [Test]
+        public void Push1()
+        {
+            var text1 = File.ReadAllText(@"E:\Designite\push.txt");
+
+            var text = File.ReadAllText(@"E:\Designite\pushkar.txt");
+            AreEqual(text, text1);
+        }
     }
 }

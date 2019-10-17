@@ -1,51 +1,57 @@
 ﻿using System;
 using System.Globalization;
 using System.IO;
-using System.Net.Sockets;
-using System.Threading;
-using System.Security.Cryptography;
+using System.Net;
 using System.Text;
 
-class Program
+namespace ObjectPrctical
 {
-public static void Main()
+    public class Program
     {
-        
-        Program p = new Program();
-        p.Readtext();
-       
-    }
+        private const string Value = "The file could not be read:";
 
-
-    public  void Readtext()
-    {
-        try
+        public static void Main()
         {
-            
-            string text = File.ReadAllText(@"E:\Designite\pushkar.txt");
-            
-            string now = Convert.ToString(DateTime.UtcNow.ToShortDateString());
-            File.AppendAllText(@"E:\Designite\pushkar.txt", now);
-            Console.WriteLine(text);
-         
-            byte[] b = ASCIIEncoding.ASCII.GetBytes(text);
-            string encrypted = Convert.ToBase64String(b);
-            File.AppendAllText(@"E:\Designite\pushkar.txt", encrypted);
-            string Etext = encrypted;
-            File.WriteAllText(@"E:\Designite\push.txt", Etext);
-            string text1 = File.ReadAllText(@"E:\Designite\push.txt");
-            Console.WriteLine(text1);
-
-            Console.ReadKey();
-           
+            var program = new Program();
+            Program p = program;
+            p.ReadTextarea();
         }
+
+        public void ReadTextarea()
+        {
+            try
+            {
+                var text = File.ReadAllText(@"E:\Designite\pushkar.txt");
+
+                using (var response = WebRequest.Create("http://www.google.com").GetResponse())
+                {
+                    var now = Convert.ToString(
+                        DateTime.ParseExact(response.Headers["date"], "ddd, dd MMM yyyy HH:mm:ss 'GMT'",
+                            CultureInfo.InvariantCulture.DateTimeFormat, DateTimeStyles.AssumeUniversal),
+                        CultureInfo.CurrentCulture);
+                    File.AppendAllText(@"E:\Designite\pushkar.txt", now);
+                }
+
+                Console.WriteLine(text);
+                var b = Encoding.ASCII.GetBytes(text);
+                var encrypted = Convert.ToBase64String(b);
+                File.AppendAllText(@"E:\Designite\pushkar.txt", encrypted);
+                string tex = encrypted;
+                File.WriteAllText(@"E:\Designite\push.txt", tex);
+                var text1 = File.ReadAllText(@"E:\Designite\push.txt");
+                Console.WriteLine(value: text1);
+                Console.ReadKey();
+            }
             catch (Exception e)
-        {
-            Console.WriteLine("The file could not be read:");
-            Console.WriteLine(e.Message);
+            {
+                Console.WriteLine(Value);
+                if (e.Message != null)
+                {
+                    Console.WriteLine(value: e.Message);
+                }
+            }
 
-        }
             Console.ReadKey();
+        }
     }
-   
 }
